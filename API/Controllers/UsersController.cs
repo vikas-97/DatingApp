@@ -4,15 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    // Some required attributes
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+
+    public class UsersController : BaseApiController
     {
         // To get some data from the database: Using Dependency Injection
             // Generate constructor 'UsersController()'
@@ -28,6 +27,7 @@ namespace API.Controllers
             // Add two endpoints to get all of the users in Database
                 // [Httpget] - getting data
             [HttpGet]
+            [AllowAnonymous]
             // Returning list of users in Actionresult by using IEnumerable of type AppUser.
             public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers() 
             {
@@ -40,6 +40,7 @@ namespace API.Controllers
                 
             }
 
+            [Authorize]
             // api/users/3
             [HttpGet("{id}")]       // id is the root parameter.
             // Returning list of users in Actionresult by using IEnumerable of type AppUser.

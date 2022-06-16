@@ -10,7 +10,9 @@ namespace API.Entities
         public int Id { get; set; }  // to identify the valid user by using ID.
 
         public string UserName { get; set; }
-
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get;  set; }
+ 
         
     }
 }
